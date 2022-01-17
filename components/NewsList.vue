@@ -42,7 +42,6 @@ export default {
             .then((response) => {
                 if(response.data.success) {
                     this.list = response.data.list;
-                    console.log(this.list);
                 }
             })
             .catch((e) => {

@@ -221,6 +221,10 @@ export default {
                     if(response.data.key === 'error-validation') {
                         this.formAddEditErrorForm = 'Ошибка ввода данных';
                     }
+                    else if(response.data.key === 'unvalid-token') {
+                        localStorage.ApiToken = '';
+                        this.$router.push('/');
+                    }
                 }
             })
             .catch((e) => {
@@ -238,6 +242,12 @@ export default {
                 if(response.data.success) {
                     this.list = response.data.list;
                 }
+                else {
+                    if(response.data.key === 'unvalid-token') {
+                        localStorage.ApiToken = '';
+                        this.$router.push('/');
+                    }
+                }
             })
             .catch((e) => {
                 console.log('FAILURE!!', e);
@@ -248,12 +258,8 @@ export default {
                 return;
             }
             
-            console.log('ok');
-            
             this.$axios.post( '/api/remove-news',
-                {
-                    id: id
-                },
+                { id: id },
                 {
                     headers: {
                         'X-Token-Secure': localStorage.ApiToken
@@ -266,6 +272,10 @@ export default {
                 else {
                     if(response.data.key === 'error-validation') {
                         this.formAddEditErrorForm = 'Ошибка ввода данных';
+                    }
+                    else if(response.data.key === 'unvalid-token') {
+                        localStorage.ApiToken = '';
+                        this.$router.push('/');
                     }
                 }
             })
@@ -289,7 +299,6 @@ export default {
             this.selectDateTime.showCalendar = false;
             this.selectDateTime.valueDate = this.$timeConverterOnlyDate(item.tms_datetime_public);
             this.selectDateTime.valueTime = this.$timeConverterOnlyTime(item.tms_datetime_public);
-            //this.$refs.news_form_add_timepicker.clearTime();
             this.$refs.news_form_add_main_image_selected_file_img.src = process.env.host + 'images/' + item.main_img;
         }
     }
