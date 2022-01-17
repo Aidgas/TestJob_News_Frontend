@@ -37,16 +37,13 @@ export default {
     created() {
         
     },
-    mounted() {
-        this.$axios.get('/api/get-news')
-            .then((response) => {
-                if(response.data.success) {
-                    this.list = response.data.list;
-                }
-            })
-            .catch((e) => {
-                console.log('FAILURE!!', e);
-            });
+    async fetch() {
+        this.list = await fetch(
+          'http://127.0.0.1:8001/api/get-news'
+        ).then(res => res.json())
+        .then(res => {
+            return res.list;
+        })
     }
 }
 </script>

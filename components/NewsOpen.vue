@@ -30,7 +30,7 @@ export default {
             title: '',
             text: '',
             main_img: '',
-            showContent: false,
+            showContent: true,
         }
     },
     computed: {
@@ -41,23 +41,21 @@ export default {
     created() {
         this.id = this.$route.params.id;
     },
-    mounted() {
-        this.$axios.get('/api/get-news-by-id/' + this.id)
-            .then((response) => {
-                if(response.data.success) {
-                    this.date_time = this.$timeConverter(response.data.row.tms_datetime_public);
-                    this.title = response.data.row.title;
-                    this.text = response.data.row.description;
-                    this.main_img = response.data.row.main_img;
-                    this.user_email = response.data.user_info.email;
-                    document.title = this.title;
-                    this.showContent = true;
-                }
-            })
-            .catch((e) => {
-                console.log('FAILURE!!', e);
-            });
-    }
+    async fetch() {
+        let data = await fetch(
+          'http://127.0.0.1:8001/api/get-news-by-id/' + this.id
+        ).then(res => res.json());
+        
+        if(data.success) {
+            this.date_time = this.$timeConverter(data.row.tms_datetime_public);
+            this.title = data.row.title;
+            this.text = data.row.description;
+            this.main_img = data.row.main_img;
+            this.user_email = data.user_info.email;
+            document.title = this.title;
+            this.showContent = true;
+        }
+    },
 }
 </script>
 
