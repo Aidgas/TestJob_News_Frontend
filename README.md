@@ -1,4 +1,4 @@
-# TestJob
+# TestJob Nuxt.js
 
 ## Build Setup
 
@@ -28,5 +28,19 @@ $ yarn generate
     • Создание, редактирование, удаление новостей (новость должна содержать текст и изображение);
     • Отложенная публикация новости в общей ленте по времени.
     
-    
-![Screenshot](Screenshots/Screenshot 2022-01-16 at 10-02-20 TestJob.png)
+
+<div align="center">
+  <img src="Screenshots/Screenshot 2022-01-16 at 10-01-31 Главна страница.png">
+</div>
+
+<div align="center">
+  <img src="Screenshots/Screenshot 2022-01-16 at 10-01-44.png">
+</div>
+
+<div align="center">
+  <img src="Screenshots/Screenshot 2022-01-16 at 10-01-54 TestJob.png">
+</div>
+
+<div align="center">
+  <img src="Screenshots/Screenshot 2022-01-16 at 10-02-20 TestJob.png">
+</div>
