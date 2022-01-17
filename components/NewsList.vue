@@ -19,31 +19,11 @@
 <script>
 export default {
     name: 'MainPage',
-    head() {
-        return {
-          title: "Главна страница"
-        };
-    },
-    data() {
-        return {
-            list: null
-        }
-    },
+    props: ['list'],
     computed: {
         hostApi() {
           return process.env.host;
         },
-    },
-    created() {
-        
-    },
-    async fetch() {
-        this.list = await fetch(
-          'http://127.0.0.1:8001/api/get-news'
-        ).then(res => res.json())
-        .then(res => {
-            return res.list;
-        })
     }
 }
 </script>

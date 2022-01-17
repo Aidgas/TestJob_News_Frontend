@@ -1,36 +1,32 @@
 <template>
     <div>
-        <div v-show="showContent">
+        <div>
             <b-container class="d-flex flex-column">
-                <div class="date_and_time">{{ date_time }} - <span>{{ user_email }}</span></div>
-                <div class="date_and_title">{{ title }}</div>
-                <img class="date_and_img" :src="hostApi + 'images/' + main_img" />
-                <div class="date_and_text" v-html="text"></div>
+                <div class="date_and_time">{{ $timeConverter(info.row.tms_datetime_public) }} - <span>{{ info.user_info.email }}</span></div>
+                <div class="date_and_title">{{ info.row.title }}</div>
+                <img class="date_and_img" :src="hostApi + 'images/' + info.row.main_img" />
+                <div class="date_and_text" v-html="info.row.description"></div>
             </b-container>
         </div>
-        <div v-show="!showContent" id="loadingFade">
+        <!--<div v-show="!showContent" id="loadingFade">
             <img src="/ajax-loader.gif" />
-        </div>
+        </div>-->
     </div>
 </template>
 
 <script>
 export default {
     name: 'MainPage',
-    head() {
-        return {
-          title: ""
-        };
-    },
+    props: ['info'],
     data() {
         return {
-            id: null,
+            /*id: null,
             date_time: '',
             user_email: '',
             title: '',
             text: '',
             main_img: '',
-            showContent: true,
+            showContent: true,*/
         }
     },
     computed: {
@@ -39,9 +35,13 @@ export default {
         },
     },
     created() {
-        this.id = this.$route.params.id;
+        //this.id = this.$route.params.id;
+        
     },
-    async fetch() {
+    mounted() {
+        //document.title = this.info.title;
+    }
+    /*async fetch() {
         let data = await fetch(
           'http://127.0.0.1:8001/api/get-news-by-id/' + this.id
         ).then(res => res.json());
@@ -55,7 +55,7 @@ export default {
             document.title = this.title;
             this.showContent = true;
         }
-    },
+    },*/
 }
 </script>
 
